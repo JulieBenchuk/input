@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import {FullInput} from "./components/FullInput";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    let [message, setMessage] = useState([
+        {message: "Hello!"},
+        {message: "This is my first message!"},
+        {message: "How are you?"},
+        {message: "What's new?)"}
+    ])
 
-export default App;
+     const addInputFunction = (input: string) => {
+        let newMessage = {message: input}
+        setMessage([newMessage, ...message])
+     }
+
+    return (
+        <div className={"App"}>
+            <FullInput addInput={addInputFunction}/>
+            {message.map((El, index) => {
+                return (
+                    <div key={index}> {El.message} </div>
+                )
+            })}
+        </div>
+    )
+}
+export default App
